@@ -1,0 +1,1068 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="add-entry"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-left">INITIATE CRF</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="pation_mm">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Step 1</ng-template>
+                <ion-row>
+                    <ion-col size="12" class="ion-no-padding">
+                        <h4 class="main_he">Demographic data</h4>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Pen Serial No.</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-bottom-padding autos">
+                    <ion-col size="2" class="ion-no-padding">
+                        <p>GP.</p>
+                    </ion-col>
+                    <ion-col size="10" class="ion-no-padding">
+                        <ion-input type="text" formControlName="panNo" placeholder="Enter Pen Serial No."></ion-input>
+                    </ion-col>
+                </ion-row>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Date of Visit</mat-label>
+                    <input [value]="date_of_visit" matInput formControlName="date_of_visit" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Sex</p>
+                    </ion-col>
+                </ion-row>
+                <ion-list lines="none">
+                    <ion-radio-group formControlName="gender">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Male</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="male"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Female</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="female"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </ion-list>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Age (Years):</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12">
+                        <ion-input type="number" formControlName="age" placeholder="Enter age in years"></ion-input>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Present Body Weight (Kg):</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-input type="text" formControlName="weight" placeholder="Body Weight" readonly (ionFocus)="showPicker()"></ion-input>
+                </ion-row>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Height (cm):</p>
+                    </ion-col>
+                </ion-row>
+
+
+                <ion-row>
+                    <ion-input type="text" formControlName="height" placeholder="Height" readonly (ionFocus)="showHeightPicker()"></ion-input>
+                </ion-row>
+
+
+
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">BMI (Kg/m2):</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12">
+                        <ion-input readonly formControlName="bmi" placeholder="Enter BMI in Kg/m2"></ion-input>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Education</p>
+                    </ion-col>
+                    <ion-col size="12">
+                        <ion-select name="education" formControlName="education">
+                            <ion-select-option value="none">None</ion-select-option>
+                            <ion-select-option value="Primary">Primary</ion-select-option>
+                            <ion-select-option value="High school">High school</ion-select-option>
+                            <ion-select-option value="Pre-University">Pre-University</ion-select-option>
+                            <ion-select-option value="Graduate">Graduate</ion-select-option>
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Employment</p>
+                    </ion-col>
+                    <ion-col size="12">
+                        <ion-select name="employment" formControlName="employment">
+                            <ion-select-option value="none">None</ion-select-option>
+                            <ion-select-option value="Employed">Employed</ion-select-option>
+                            <ion-select-option value="Unemployed">Unemployed</ion-select-option>
+
+                        </ion-select>
+                    </ion-col>
+                </ion-row>
+                <!-- <ion-row>
+          <ion-col size="12">
+            <ion-item lines="none"> 
+              <ion-input placeholder="Employment"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row> -->
+
+                <div>
+                    <button *ngIf="!completed" (click)="submitFirst(true)" mat-button class="bnt_clas">Save as Draft</button>
+                    <button (click)="(!completed)?submitFirst(false):'javascript:void(0)'" mat-button matStepperNext class="bnt_clas">Next</button>
+
+                </div>
+            </form>
+        </mat-step>
+
+        <!----------------------------------Step 02--------------------------------------------------->
+
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Step 2</ng-template>
+
+                <ion-row>
+                    <ion-col size="12" class="ion-no-padding">
+                        <h4 class="main_he">Medical History</h4>
+                    </ion-col>
+                </ion-row>
+
+                <ion-item lines="none">
+                    <ion-label>Duration of Diabetes (Years)</ion-label>
+                    <ion-select value="0" name="diabetes" formControlName="diabetes">
+                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+
+                    </ion-select>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <ion-label>Treated for Diabetes since (Years)</ion-label>
+                    <ion-select value="0" name="treated_diabetes" formControlName="treated_diabetes">
+                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+                <!-- <ion-row class="ion-no-padding">
+          <ion-col size="12" class="ion-no-padding">
+            <p class="step_titles">Age at diagnosis of Diabetes: </p>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row> 
+          <ion-col size="12">
+            <ion-item lines="none"> 
+              <ion-input placeholder="Enter Age in years"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row> -->
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Family History of Diabetes</p>
+                    </ion-col>
+                </ion-row>
+                <ion-list>
+                    <ion-radio-group name="history_of_diabetes" formControlName="history_of_diabetes">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Yes</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="1"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>No</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="0"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </ion-list>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Hypertension</p>
+                    </ion-col>
+                </ion-row>
+                <ion-list>
+                    <ion-radio-group name="hypertension" formControlName="hypertension">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Yes</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>No</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </ion-list>
+
+                <ion-item lines="none">
+                    <ion-label>Duration of Hypertension (Years)</ion-label>
+                    <ion-select name="duration_hypertension" formControlName="duration_hypertension">
+                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Blood pressure (mmHg) Systolic</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-input type="text" formControlName="systolicpicker" placeholder="Blood pressure" readonly (ionFocus)="showSystolicPicker()"></ion-input>
+                </ion-row>
+
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Blood pressure (mmHg) Diastolic</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-input type="text" formControlName="diastolicpicker" placeholder="Blood pressure" readonly (ionFocus)="showDiastolicPicker()"></ion-input>
+                </ion-row>
+
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Smoking</p>
+                    </ion-col>
+                </ion-row>
+                <ion-list>
+                    <ion-radio-group name="smoking" formControlName="smoking">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Yes</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="1"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>No</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="0"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </ion-list>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Alcohol</p>
+                    </ion-col>
+                </ion-row>
+                <ion-list>
+                    <ion-radio-group name="alcohol" formControlName="alcohol">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Yes</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="1"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>No</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="0"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </ion-list>
+
+                <!-- <ion-row class="ion-no-padding">
+          <ion-col size="12" class="ion-no-padding">
+            <p class="step_titles">Any vascular Complications present at diagnosis</p>
+          </ion-col>
+        </ion-row>
+        <ion-list>
+          <ion-radio-group (ionChange)="complicationChange($event)">
+            <ion-row class="ion-no-padding">
+              <ion-col size="6" class="ion-no-padding">
+                <ion-item lines="none">
+                  <ion-label>Yes</ion-label>
+                <ion-radio slot="start" value="yes"></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6" class="ion-no-padding">
+                <ion-item lines="none">
+                  <ion-label>No</ion-label>
+                <ion-radio slot="start" value="no"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </ion-list>
+        <div *ngIf="showComplicationsDesc">
+          <ion-row class="ion-no-padding">
+            <ion-col size="12" class="ion-no-padding">
+              <p class="step_titles">kindly provide details of the complications at diagnosis):</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item lines="none"> 
+                <ion-input placeholder="Enter details of the complications"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div> -->
+
+
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Does the subject have any complications and co morbid medical conditions?</p>
+                    </ion-col>
+                </ion-row>
+                <ion-list>
+                    <ion-radio-group (ionChange)="coMorbid($event)" name="comorbid_medical" formControlName="comorbid_medical">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Yes</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>No</ion-label>
+                                    <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </ion-list>
+
+                <div *ngIf="coMorbidDesc">
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <ion-item lines="none">
+                                <ion-label>Hypertension</ion-label>
+                                <ion-checkbox (ionChange)="showHypertension($event)" color="primary" name="comorbid_hypertension" formControlName="comorbid_hypertension" slot="start"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ng-container *ngIf="showHypertensionDiv">
+                        <ion-row>
+                            <ion-col size="12" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Duration (Years)</ion-label>
+                                    <ion-select value="0" name="comorbid_hypertension_duration" formControlName="comorbid_hypertension_duration">
+                                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="12" class="ion-no-padding">
+                                <p class="step_titles">Medication</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-list>
+                            <ion-radio-group name="comorbid_hypertension_medication" formControlName="comorbid_hypertension_medication">
+                                <ion-row class="ion-no-padding">
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>Yes</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>No</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-list>
+                    </ng-container>
+
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <ion-item lines="none">
+                                <ion-label>Dyslipidemia</ion-label>
+                                <ion-checkbox color="primary" (ionChange)="dislipidemia($event)" name="comorbid_Dyslipidemia" formControlName="comorbid_Dyslipidemia" slot="start"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ng-container *ngIf="showDyslipidemia">
+                        <ion-row>
+                            <ion-col size="12" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Duration (Years)</ion-label>
+                                    <ion-select value="0" name="comorbid_Dyslipidemia_duration" formControlName="comorbid_Dyslipidemia_duration">
+                                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="12" class="ion-no-padding">
+                                <p class="step_titles">Medication</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-list>
+                            <ion-radio-group name="comorbid_Dyslipidemia_medication" formControlName="comorbid_Dyslipidemia_medication">
+                                <ion-row class="ion-no-padding">
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>Yes</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>No</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-list>
+                    </ng-container>
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <ion-item lines="none">
+                                <ion-label>Coronary Artery Disease</ion-label>
+                                <ion-checkbox color="primary" (ionChange)="coronaryArtery($event)" name="comorbid_Artery" formControlName="comorbid_Artery" slot="start"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ng-container *ngIf="coronary">
+                        <ion-row>
+                            <ion-col size="12" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Duration (Years)</ion-label>
+                                    <ion-select value="0" name="comorbid_Artery_duration" formControlName="comorbid_Artery_duration">
+                                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="12" class="ion-no-padding">
+                                <p class="step_titles">Medication</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-list>
+                            <ion-radio-group name="comorbid_Artery_medication" formControlName="comorbid_Artery_medication">
+                                <ion-row class="ion-no-padding">
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>Yes</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>No</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-list>
+                    </ng-container>
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <ion-item lines="none">
+                                <ion-label>Stroke</ion-label>
+                                <ion-checkbox (ionChange)="showStroke($event)" color="primary" name="comorbid_Stroke" formControlName="comorbid_Stroke" slot="start"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ng-container *ngIf="stroke">
+                        <ion-row>
+                            <ion-col size="12" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Duration (Years)</ion-label>
+                                    <ion-select value="0" name="comorbid_Stroke_duration" formControlName="comorbid_Stroke_duration">
+                                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="12" class="ion-no-padding">
+                                <p class="step_titles">Medication</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-list>
+                            <ion-radio-group name="comorbid_Stroke_medication" formControlName="comorbid_Stroke_medication">
+                                <ion-row class="ion-no-padding">
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>Yes</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>No</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-list>
+                    </ng-container>
+
+
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <ion-item lines="none">
+                                <ion-label>Neuropathy</ion-label>
+                                <ion-checkbox (ionChange)="changeNeuropathy($event)" color="primary" name="comorbid_Neuropathy" formControlName="comorbid_Neuropathy" slot="start"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ng-container *ngIf="showNeuro">
+                        <ion-row>
+                            <ion-col size="12" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Duration (Years)</ion-label>
+                                    <ion-select value="0" name="comorbid_Neuropathy_duration" formControlName="comorbid_Neuropathy_duration">
+                                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="12" class="ion-no-padding">
+                                <p class="step_titles">Medication</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-list>
+                            <ion-radio-group name="comorbid_Neuropathy_medication" formControlName="comorbid_Neuropathy_medication">
+                                <ion-row class="ion-no-padding">
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>Yes</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>No</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-list>
+                    </ng-container>
+
+
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <ion-item lines="none">
+                                <ion-label>Retinopathy</ion-label>
+                                <ion-checkbox (ionChange)="showRetinopathy($event)" color="primary" name="comorbid_Retinopathy" formControlName="comorbid_Retinopathy" slot="start"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ng-container *ngIf="showRetino">
+                        <ion-row>
+                            <ion-col size="12" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Duration (Years)</ion-label>
+                                    <ion-select value="0" name="comorbid_Retinopathy_duration" formControlName="comorbid_Retinopathy_duration">
+                                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="12" class="ion-no-padding">
+                                <p class="step_titles">Medication</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-list>
+                            <ion-radio-group name="comorbid_Retinopathy_medication" formControlName="comorbid_Retinopathy_medication">
+                                <ion-row class="ion-no-padding">
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>Yes</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>No</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-list>
+                    </ng-container>
+
+
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <ion-item lines="none">
+                                <ion-label>Nephropathy</ion-label>
+                                <ion-checkbox (ionChange)="showNephropathy($event)" color="primary" name="comorbid_Nephropathy" formControlName="comorbid_Nephropathy" slot="start"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ng-container *ngIf="showNephro">
+                        <ion-row>
+                            <ion-col size="12" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Duration (Years)</ion-label>
+                                    <ion-select value="0" name="comorbid_Nephropathy_duration" formControlName="comorbid_Nephropathy_duration">
+                                        <ion-select-option value="0.5">Less than 1 year</ion-select-option>
+                                        <ion-select-option *ngFor="let index of getOptions(50)">{{index}}</ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="12" class="ion-no-padding">
+                                <p class="step_titles">Medication</p>
+                            </ion-col>
+                        </ion-row>
+                        <ion-list>
+                            <ion-radio-group name="comorbid_Nephropathy_medication" formControlName="comorbid_Nephropathy_medication">
+                                <ion-row class="ion-no-padding">
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>Yes</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="yes"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                    <ion-col size="6" class="ion-no-padding">
+                                        <ion-item lines="none">
+                                            <ion-label>No</ion-label>
+                                            <ion-radio [disabled]="completed" slot="start" value="no"></ion-radio>
+                                        </ion-item>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-radio-group>
+                        </ion-list>
+                    </ng-container>
+
+                </div>
+
+
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Anti-Diabetes Medication (Except Insulin):</p>
+                    </ion-col>
+                </ion-row>
+
+                <ion-list>
+                    <ion-item lines="none">
+                        <ion-label>Biguanides</ion-label>
+                        <ion-checkbox [disabled]="completed" [checked]="checkAntiDiabetes('Biguanides')" (ionChange)="antiDiabetes($event,'Biguanides')" color="primary" slot="start"></ion-checkbox>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-checkbox [disabled]="completed" [checked]="checkAntiDiabetes('Sulphonylureas')" (ionChange)="antiDiabetes($event,'Sulphonylureas')" color="primary" slot="start"></ion-checkbox>
+                        <ion-label>Sulphonylureas</ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-checkbox [disabled]="completed" [checked]="checkAntiDiabetes('SGLT2 Inhibitors')" (ionChange)="antiDiabetes($event,'SGLT2 Inhibitors')" color="primary" slot="start"></ion-checkbox>
+                        <ion-label>SGLT2 Inhibitors</ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-checkbox [disabled]="completed" [checked]="checkAntiDiabetes('Thiazolidendiones')" (ionChange)="antiDiabetes($event,'Thiazolidendiones')" color="primary" slot="start"></ion-checkbox>
+                        <ion-label>Thiazolidendiones</ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-checkbox [disabled]="completed" [checked]="checkAntiDiabetes('GLP Analogues')" (ionChange)="antiDiabetes($event,'GLP Analogues')" color="primary" slot="start"></ion-checkbox>
+                        <ion-label>GLP Analogues</ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-checkbox [disabled]="completed" [checked]="checkAntiDiabetes('DPP4 Inhibitors')" (ionChange)="antiDiabetes($event,'DPP4 Inhibitors')" color="primary" slot="start"></ion-checkbox>
+                        <ion-label>DPP4 Inhibitors</ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-checkbox [disabled]="completed" [checked]="checkAntiDiabetes('Double Drug Fixed Dose Combination')" (ionChange)="antiDiabetes($event,'Double Drug Fixed Dose Combination')" color="primary" slot="start"></ion-checkbox>
+                        <ion-label>Double Drug Fixed Dose <br /> Combination</ion-label>
+                    </ion-item>
+                    <ion-item lines="none">
+                        <ion-checkbox [disabled]="completed" [checked]="checkAntiDiabetes('Triple Drug Fixed Dose Combination')" (ionChange)="antiDiabetes($event,'Triple Drug Fixed Dose Combinations')" color="primary" slot="start"></ion-checkbox>
+                        <ion-label>Triple Drug Fixed Dose <br /> Combinations</ion-label>
+                    </ion-item>
+                </ion-list>
+
+                <div>
+                    <button mat-button matStepperPrevious class="bnt_clas">Back</button>
+                    <button *ngIf="!completed" (click)="submitSecond(true)" mat-button class="bnt_clas">Save as Draft</button>
+                    <button (click)="(!completed)?submitSecond(false):'javascript:void(0)'" mat-button matStepperNext class="bnt_clas">Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <!---------------------------------Step 03----------------------------------------->
+
+        <mat-step [stepControl]="thirdFormGroup">
+            <form [formGroup]="thirdFormGroup">
+
+                <ng-template matStepLabel>Step 3</ng-template>
+
+                <ion-row>
+                    <ion-col size="12" class="ion-no-padding">
+                        <h4 class="main_he">Blood Investigations</h4>
+                    </ion-col>
+                </ion-row>
+                <!------------------------------------------------------------->
+
+                <div>
+                    <h4 class="bloods">BLOOD INVESTIGATIONS</h4>
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="step_titles">Fasting Plasma Glucose (FPG)</p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-input type="text" formControlName="FastingPlasma" placeholder="Fasting Plasma" readonly (ionFocus)="showFastingPlasmaPicker()"></ion-input>
+                    </ion-row>
+
+
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="step_titles">Postprandial Plasma Glucose (PPG)</p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-input type="text" formControlName="PostprandialPlasma" placeholder="Postprandial Plasma" readonly (ionFocus)="showPostprandialPlasmaPicker()"></ion-input>
+                    </ion-row>
+
+
+
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="step_titles">Glycosylated Hemoglobin (HbA1c) </p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-input type="text" formControlName="Glycosylated" placeholder="Glycosylated Hemoglobin (HbA1c)" readonly (ionFocus)="showHbac1()"></ion-input>
+                            <!-- <ion-select value="1" name="Glycosylated" formControlName="Glycosylated">
+              <ion-select-option *ngFor="let index of getglycosylated(20)">{{index}}</ion-select-option>
+            </ion-select> -->
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="step_titles">HbA1c test performed in Lab(HPLC)</p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-list>
+                        <ion-radio-group name="HbA1c" formControlName="HbA1c">
+                            <ion-row class="ion-no-padding">
+                                <ion-col size="6" class="ion-no-padding">
+                                    <ion-item lines="none">
+                                        <ion-label>Yes</ion-label>
+                                        <ion-radio [disabled]="completed" slot="start" value="1"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col size="6" class="ion-no-padding">
+                                    <ion-item lines="none">
+                                        <ion-label>No</ion-label>
+                                        <ion-radio [disabled]="completed" slot="start" value="0"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-radio-group>
+                    </ion-list>
+
+                    <ion-row class="ion-no-padding">
+                        <ion-col size="12" class="ion-no-padding">
+                            <p class="step_titles">S.Creatinine (mg/dl ) </p>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-select value="" name="Creatinine" formControlName="Creatinine">
+                                <ion-select-option value="">Choose Creatinine Value </ion-select-option>
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of getCreatinine()">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-col>
+                    </ion-row>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious class="bnt_clas">Back</button>
+                    <button *ngIf="!completed" (click)="submitThird(true)" mat-button class="bnt_clas">Save as Draft</button>
+                    <button (click)="(!completed)?submitThird(false):'javascript:void(0)'" mat-button matStepperNext class="bnt_clas">Next</button>
+                </div>
+                <!---------------------->
+            </form>
+        </mat-step>
+        <mat-step>
+            <form [formGroup]="fourthFormGroup">
+                <ng-template matStepLabel>Step 4</ng-template>
+                <ion-row>
+                    <ion-col size="12" class="ion-no-padding">
+                        <h4 class="main_he">Insulinisation</h4>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <p class="step_titles">Insulin initiated with initiation dose & time</p>
+                    </ion-col>
+                </ion-row>
+
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <ion-item lines="none">
+                            <ion-label>Human Premixed 30/70 (In Units)</ion-label>
+                            <ion-checkbox (ionChange)="changeHp($event)" color="primary" name="Human_Premixed_30" formControlName="Human_Premixed_30" slot="start"></ion-checkbox>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <div *ngIf="showHpFields">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>Breakfast</ion-label>
+                            <ion-select value="3" name="Human_Premixed_30_Breakfast" formControlName="Human_Premixed_30_Breakfast" (ionChange)="SelectHP1($event,'Human_Premixed_30_Breakfast')">
+                                <!-- <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="200">200</ion-select-option> -->
+                                <!-- <ion-select-option value="0">0</ion-select-option> -->
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Lunch</ion-label>
+                            <ion-select value="3" name="Human_Premixed_30_Lunch" formControlName="Human_Premixed_30_Lunch" (ionChange)="SelectHP1($event,'Human_Premixed_30_Lunch')">
+
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Dinner</ion-label>
+                            <ion-select value="3" name="Human_Premixed_30_Dinner" formControlName="Human_Premixed_30_Dinner" (ionChange)="SelectHP1($event,'Human_Premixed_30_Dinner')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-list>
+                </div>
+
+
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <ion-item lines="none">
+                            <ion-label>Human Premixed 50/50 (In Units)</ion-label>
+                            <ion-checkbox (ionChange)="changeHp50($event)" color="primary" formControlName="Human_Premixed_50" name="Human_Premixed_50" slot="start"></ion-checkbox>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <div *ngIf="showHpFields1">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>Breakfast</ion-label>
+                            <ion-select value="3" name="Human_Premixed_50_Breakfast" formControlName="Human_Premixed_50_Breakfast" (ionChange)="SelectHPf1($event,'Human_Premixed_50_Breakfast')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Lunch</ion-label>
+                            <ion-select value="3" name="Human_Premixed_50_Lunch" formControlName="Human_Premixed_50_Lunch" (ionChange)="SelectHPf1($event,'Human_Premixed_50_Lunch')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Dinner</ion-label>
+                            <ion-select value="3" name="Human_Premixed_50_Dinner" formControlName="Human_Premixed_50_Dinner" (ionChange)="SelectHPf1($event,'Human_Premixed_50_Dinner')">
+
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-list>
+                </div>
+
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <ion-item lines="none">
+                            <ion-label>Regular insulin (In Units)</ion-label>
+                            <ion-checkbox (ionChange)="changeRi($event)" color="primary" name="Regular_insulin" formControlName="Regular_insulin" slot="start"></ion-checkbox>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <div *ngIf="showHpFields2">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>Breakfast</ion-label>
+                            <ion-select value="3" name="Regular_insulin_Breakfast" formControlName="Regular_insulin_Breakfast" (ionChange)="SelectIs1($event,'Regular_insulin_Breakfast')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Lunch</ion-label>
+                            <ion-select value="3" name="Regular_insulin_Lunch" formControlName="Regular_insulin_Lunch" (ionChange)="SelectIs1($event,'Regular_insulin_Lunch')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Dinner</ion-label>
+                            <ion-select value="3" name="Regular_insulin_Dinner" formControlName="Regular_insulin_Dinner" (ionChange)="SelectIs1($event,'Regular_insulin_Dinner')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-list>
+                </div>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <ion-item lines="none">
+                            <ion-label>Regular NPH (In Units)</ion-label>
+                            <ion-checkbox (ionChange)="changeNph($event)" color="primary" name="Regular_NPH" formControlName="Regular_NPH" slot="start"></ion-checkbox>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <div *ngIf="showHpFields3">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>Breakfast</ion-label>
+                            <ion-select value="3" name="Regular_NPH_Breakfast" formControlName="Regular_NPH_Breakfast" (ionChange)="Selectnph1($event,'Regular_NPH_Breakfast')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Lunch</ion-label>
+                            <ion-select value="3" name="Regular_NPH_Lunch" formControlName="Regular_NPH_Lunch" (ionChange)="Selectnph1($event,'Regular_NPH_Lunch')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Dinner</ion-label>
+                            <ion-select value="3" name="Regular_NPH_Dinner" formControlName="Regular_NPH_Dinner" (ionChange)="Selectnph1($event,'Regular_NPH_Dinner')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-list>
+                </div>
+
+                <ion-row class="ion-no-padding">
+                    <ion-col size="12" class="ion-no-padding">
+                        <ion-item lines="none">
+                            <ion-label>Insulin Glargine (In Units)</ion-label>
+                            <ion-checkbox (ionChange)="changeGlargine($event)" color="primary" name="Insulin_Glargine" formControlName="Insulin_Glargine" slot="start"></ion-checkbox>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <div *ngIf="showHpFields4">
+                    <ion-list>
+                        <ion-item>
+                            <ion-label>Breakfast</ion-label>
+                            <ion-select name="Insulin_Glargine_Breakfast" formControlName="Insulin_Glargine_Breakfast" (ionChange)="Select1($event,'Insulin_Glargine_Breakfast')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198) ">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Lunch</ion-label>
+                            <ion-select name="Insulin_Glargine_Lunch" formControlName="Insulin_Glargine_Lunch" (ionChange)="Select1($event,'Insulin_Glargine_Lunch')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198)">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Dinner</ion-label>
+                            <ion-select name="Insulin_Glargine_Dinner" formControlName="Insulin_Glargine_Dinner" (ionChange)="Select1($event,'Insulin_Glargine_Dinner')">
+                                <ion-select-option value="0">None</ion-select-option>
+                                <ion-select-option *ngFor="let index of gethuman(198) ">{{index}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-list>
+                </div>
+                <div>
+                    <!-- <button mat-button matStepperPrevious class="bnt_clas ">Back</button> -->
+                    <!-- <button mat-button class="bnt_clas ">Save as Draft</button> -->
+                    <button mat-button matStepperPrevious *ngIf="!completed " class="bnt_clas ">Back</button>
+                    <button mat-button matStepperPrevious *ngIf="completed " (click)="back() " class="bnt_clas ">Back</button>
+                    <button *ngIf="!completed " (click)="submitFourth() " mat-button class="bnt_clas ">Submit</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+</ion-content>

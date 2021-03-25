@@ -1,0 +1,33 @@
+ion-item {
+    --background: transparent;
+}
+.survey_btn{
+    height: 40px;
+}
+ion-list {
+    background: transparent !important;
+}
+ion-footer ion-toolbar {
+    border-radius: 0;
+    --background: #fffcf3;
+}
+.img_invoice {
+    width: 50%;
+    margin: auto;
+    display: block;
+    margin-top: 30px;
+}
+.data_notfound h1 {
+    text-align: center;
+    color: #000;
+    padding: 20px;
+}
+.bnt_clas {
+    background: #0f406b;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 12px;
+    margin-right: 10px;
+    padding: 8px 20px;
+    margin-top: 30px;
+  }

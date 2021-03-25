@@ -1,0 +1,40 @@
+<ion-content fullscreen padding class="paddming">
+    <div class="title_login">
+        <div class="logo_main">
+            <img src="assets/img/BIQoL_Logo_72dpi.png">
+        </div>
+    </div>
+
+    <form [formGroup]="loginForm" class="main_forms">
+
+        <ion-item lines="full">
+            <ion-label position="floating">Account Number</ion-label>
+            <ion-input formControlName="email" type="text" autocomplete="off" clear-input></ion-input>
+        </ion-item>
+
+        <ion-item lines="full" class="ion-padding-top">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input formControlName="password" type="password" required autocomplete="off" clear-input></ion-input>
+        </ion-item>
+
+        <ion-row class="ion-padding-top">
+            <ion-col size="8">
+                <ion-text><a [routerLink]="['/forgotpassword']">Forgot password?</a></ion-text>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button type="button" class="custom_btn" shape="round" fill="outline" (click)="login()"> Login </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-row class="ion-margin-top_02">
+      <ion-col size="12" class="text_ce">
+        <ion-text>Don't have an account? <a href="" routerLink="/register">Create</a></ion-text>
+      </ion-col>
+    </ion-row> -->
+
+    </form>
+
+    <!-- <div class="imge_boom">
+    <img src="assets/images/login_bottom.png">
+  </div> -->
+</ion-content>

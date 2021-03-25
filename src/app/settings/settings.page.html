@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="dashboard"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-left">Settings</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="Form" class="main_forms">
+        <ion-row class="ion-margin-top">
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label position="floating">Current Password</ion-label>
+                    <ion-input type="password" formControlName="old_pass"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-margin-top">
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label position="floating">New Password</ion-label>
+                    <ion-input type="password" formControlName="new_pass"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-margin-top">
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label position="floating">Confirm New Password</ion-label>
+                    <ion-input type="password" formControlName="cnew_pass"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-padding-top">
+            <ion-col size="12">
+                <ion-button type="submit" class="survey_btn" expand="full" shape="round" fill="outline" (click)='submit()'> CHANGE PASSWORD </ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-content>

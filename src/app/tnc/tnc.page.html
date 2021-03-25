@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Service Agreement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <p [innerHtml]="tncMessage"></p>
+  <h6 class="mt-3" *ngIf="messeage">Awaiting for Agreement</h6>
+<p *ngIf="tncMessage">
+<br/><br/>Agreement Date & Time:<br/>{{this.today | date}}
+</p>
+<p *ngIf="tncMessage" class="mt-2">
+  <ion-label>GST</ion-label>
+  <ion-checkbox ></ion-checkbox>
+</p>
+<!-- <div *ngIf="showGst">
+  <ion-label>GST Number</ion-label>
+  <ion-input type="text" [(ngModel)]="gst_no" name="gst_no" placeholder="GST No"></ion-input>
+</div> -->
+<div>
+  <ion-button *ngIf="tncMessage" (click)="agree()">Agree</ion-button>
+  <ion-button (click)="cancel()">Cancel</ion-button>
+</div>
+</ion-content>

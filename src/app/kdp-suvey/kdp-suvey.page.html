@@ -1,0 +1,496 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="add-entry"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-left">KAP Survey</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <mat-vertical-stepper (selectionChange)="stepChanged($event, stepper);" linear="true" #stepper class="setpers">
+        <mat-step [stepControl]="kdpStep1" class="StepTitle-Head">
+            <ng-template matStepLabel>KAP Survey: Insulin Initiation and Barriers<br/> for Insulin Initiation</ng-template>
+            <form [formGroup]="kdpStep1">
+                <div class="agger_group">
+                    <ion-row>
+                        <ion-item lines="none" class="check_nones">
+                            <ion-label>I prefer to delay the initiation of insulin therapy until it is absolutely essential (after trying a combination of several classes of oral hypoglycemic agents at maximal doses) </ion-label>
+                        </ion-item>
+                    </ion-row>
+                    <ion-radio-group formControlName="delay_insulin">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Agree</ion-label>
+                                    <ion-radio slot="start" value="Agree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Disagree</ion-label>
+                                    <ion-radio slot="start" value="Disagree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+
+                <div class="agger_group">
+                    <ion-row>
+                        <ion-item lines="none" class="check_nones">
+                            <ion-label>
+                                I believe that the initiation of insulin therapy is one of the most difficult aspects of managing my patients with T2DM
+                            </ion-label>
+                        </ion-item>
+                    </ion-row>
+                    <ion-radio-group formControlName="insulin_tdm">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Agree</ion-label>
+                                    <ion-radio slot="start" value="Agree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Disagree</ion-label>
+                                    <ion-radio slot="start" value="Disagree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+
+                <div class="agger_group">
+                    <ion-row>
+                        <ion-item lines="none" class="check_nones">
+                            <ion-label>
+                                I believe that most of my patients will eventually need to go on insulin regardless of how well they adhere to their treatment regimen
+                            </ion-label>
+                        </ion-item>
+                    </ion-row>
+                    <ion-radio-group formControlName="insulin_regardless">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Agree</ion-label>
+                                    <ion-radio slot="start" value="Agree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Disagree</ion-label>
+                                    <ion-radio slot="start" value="Disagree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+
+
+                <div class="agger_group">
+                    <ion-row>
+                        <ion-item lines="none" class="check_nones">
+                            <ion-label>
+                                I believe that for most of my patients, the benefits of insulin therapy outweigh the risks of hypoglycemia and weight gain.
+                            </ion-label>
+                        </ion-item>
+                    </ion-row>
+                    <ion-radio-group formControlName="benifit_insulin">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Agree</ion-label>
+                                    <ion-radio slot="start" value="Agree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Disagree</ion-label>
+                                    <ion-radio slot="start" value="Disagree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+
+                <div class="agger_group">
+                    <ion-row>
+                        <ion-item lines="none" class="check_nones">
+                            <ion-label>
+                                I believe that most of my patients would benefit from receiving insulin therapy prior to the development of diabetes complications.
+                            </ion-label>
+                        </ion-item>
+                    </ion-row>
+                    <ion-radio-group formControlName="receiving_insulin">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Agree</ion-label>
+                                    <ion-radio slot="start" value="Agree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Disagree</ion-label>
+                                    <ion-radio slot="start" value="Disagree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+
+                <div class="agger_group">
+                    <ion-row>
+                        <ion-item lines="none" class="check_nones">
+                            <ion-label>
+                                I believe that proper patient education and training are the keys to successful initiation of insulin therapy.
+                            </ion-label>
+                        </ion-item>
+                    </ion-row>
+                    <ion-radio-group formControlName="success_insulin">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Agree</ion-label>
+                                    <ion-radio slot="start" value="Agree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Disagree</ion-label>
+                                    <ion-radio slot="start" value="Disagree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+
+                <div class="agger_group">
+                    <ion-row>
+                        <ion-item lines="none" class="check_nones">
+                            <ion-label>
+                                I believe that for most of my patients, training on the proper administration and usage of insulin is not complicated.
+                            </ion-label>
+                        </ion-item>
+                    </ion-row>
+                    <ion-radio-group formControlName="notcomplicated_insulin">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Agree</ion-label>
+                                    <ion-radio slot="start" value="Agree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Disagree</ion-label>
+                                    <ion-radio slot="start" value="Disagree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+
+                <div class="agger_group">
+                    <ion-row>
+                        <ion-item lines="none" class="check_nones">
+                            <ion-label>
+                                I believe that most of my patients on oral diabetes therapy do not accept insulin therapy.
+                            </ion-label>
+                        </ion-item>
+                    </ion-row>
+                    <ion-radio-group formControlName="insulin_therapy">
+                        <ion-row class="ion-no-padding">
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Agree</ion-label>
+                                    <ion-radio slot="start" value="Agree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="6" class="ion-no-padding">
+                                <ion-item lines="none">
+                                    <ion-label>Disagree</ion-label>
+                                    <ion-radio slot="start" value="Disagree"></ion-radio>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-radio-group>
+                </div>
+
+                <div>
+                    <button (click)="firstSubmit()" mat-button matStepperNext class="bnt_clas">Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Reasons for reluctance to initiate insulin</ng-template>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-button color="primary" (click)="presentModal()">
+                        <ion-icon name="information-circle"></ion-icon> How to rate</ion-button>
+                    <p class="step_titles">
+                        I may be reluctant to initiate insulin therapy for my patients with T2DM who: (Can you rate in the order of importance in your practice where 1 being top most and 9 being least)
+                    </p>
+                </ion-col>
+            </ion-row>
+
+            <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+
+                <ion-reorder *ngFor="let item of reasons">
+                    <ion-reorder>
+                        <ion-row>
+                            <ion-col size="12">
+                                <p class="step_titles">{{item}} </p>
+                            </ion-col>
+                        </ion-row>
+                    </ion-reorder>
+                </ion-reorder>
+
+            </ion-reorder-group>
+
+            <div>
+                <button mat-button matStepperPrevious class="bnt_clas">Back</button>
+                <button mat-button matStepperNext class="bnt_clas">Next</button>
+            </div>
+
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Physician perspectives of patient <br /> barriers to insulin therapy</ng-template>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-button color="primary" (click)="presentModal()">
+                        <ion-icon name="information-circle"></ion-icon>How to rate</ion-button>
+                    <p class="step_titles">
+                        In the order of the important barrier(s) for patient acceptance of insulin therapy, rate the following
+                    </p>
+                </ion-col>
+            </ion-row>
+
+            <ion-reorder-group (ionItemReorder)="doReorderAcceptance($event)" disabled="false">
+
+                <ion-reorder *ngFor="let item of acceptanceInsulin">
+                    <ion-row>
+                        <ion-col size="12">
+                            <p class="step_titles">{{item}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-reorder>
+
+            </ion-reorder-group>
+
+            <div>
+                <button mat-button matStepperPrevious class="bnt_clas">Back</button>
+                <button mat-button matStepperNext (click)="showNext()" class="bnt_clas">Next</button>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="kdpStep2" style="padding: 0;">
+            <ng-template matStepLabel>Insulinisation barriers and outcomes</ng-template>
+            <ion-row>
+                <ion-col>
+                    <p class="step_titles">Out of 100 patients who are initiated on insulins, what percentage of patients adhere to the regimen for the below duration (Sum should be equal to 100)</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                Sum : {{sum}}
+            </ion-row>
+
+            <ion-row class="rating-row">
+                <ion-col size="12">
+                    <div class="rengs">
+                        <p class="step_titles">6 months</p>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <div class="range-slide-info">
+                        <span class="counts_reng">{{sixMonths}}</span>
+                        <div class="range-slide">
+                            <p>0%</p>
+                            <mat-slider color="primary" (change)="valueChanged($event)" min="0" max="100" step="1" value="0" thumbLabel tickInterval="1"></mat-slider>
+                            <p>100%</p>
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="rating-row">
+                <ion-col size="12">
+                    <div class="rengs">
+                        <p class="step_titles">One year – two years</p>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <div class="range-slide-info">
+                        <span class="counts_reng">{{oneYear}}</span>
+                        <div class="range-slide">
+                            <p>0%</p>
+                            <mat-slider color="primary" (change)="valueChangedOne($event)" min="0" max="100" step="1" value="0" thumbLabel tickInterval="1"></mat-slider>
+                            <p>100%</p>
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="rating-row">
+                <ion-col size="12">
+                    <div class="rengs">
+                        <p class="step_titles">Three – Five years</p>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <div class="range-slide-info">
+                        <span class="counts_reng">{{threeYear}}</span>
+                        <div class="range-slide">
+                            <p>0%</p>
+                            <mat-slider color="primary" (change)="valueChangedThree($event)" min="0" max="100" step="1" value="0" thumbLabel tickInterval="1"></mat-slider>
+                            <p>100%</p>
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="rating-row">
+                <ion-col size="12">
+                    <div class="rengs">
+                        <p class="step_titles">Five years</p>
+                    </div>
+                </ion-col>
+                <ion-col size="12">
+                    <div class="range-slide-info">
+                        <span class="counts_reng">{{FiveYear}}</span>
+                        <div class="range-slide">
+                            <p>0%</p>
+                            <mat-slider color="primary" (change)="valueChangedFive($event)" min="0" max="100" step="1" value="0" thumbLabel tickInterval="1"></mat-slider>
+                            <p>100%</p>
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+            <br/>
+            <ion-row>
+                <ion-col>
+                    <p class="step_titles">Impact of Insulin in people with T2DM </p>
+                    <p class="step_titles">Choose three clinically impactful options </p>
+
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item lines="none">
+                        <ion-label>Beta Cell preservation</ion-label>
+                        <ion-checkbox (ionChange)="impactChange($event,'Beta Cell preservation')" color="primary" slot="start"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item lines="none">
+                        <ion-label>The role of Insulin in reducing <br />Micro albuminuria </ion-label>
+                        <ion-checkbox (ionChange)="impactChange($event,'The role of Insulin in reducing Micro albuminuria')" color="primary" slot="start"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item lines="none">
+                        <ion-label>Reducing the inflammatory <br />markers</ion-label>
+                        <ion-checkbox (ionChange)="impactChange($event,'Reducing the inflammatory markers')" color="primary" slot="start"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item lines="none">
+                        <ion-label>Reducing the CV risk factors</ion-label>
+                        <ion-checkbox (ionChange)="impactChange($event,'Reducing the CV risk factors')" color="primary" slot="start"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <!-- <ion-row>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-label>Micro Angiopathy</ion-label>
+            <ion-checkbox [disabled]="impacts.length == 3" (ionChange)="impactChange($event,'Micro Angiopathy')" color="primary" slot="start"></ion-checkbox>
+          </ion-item>
+        </ion-col>       
+      </ion-row> -->
+
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item lines="none">
+                        <ion-label>Reduce Infections</ion-label>
+                        <ion-checkbox (ionChange)="impactChange($event,'Reduce Infections')" color="primary" slot="start"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item lines="none">
+                        <ion-label>Neuropathy</ion-label>
+                        <ion-checkbox (ionChange)="impactChange($event,'Neuropathy')" color="primary" slot="start"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="12">
+                    <ion-item lines="none">
+                        <ion-label>Reduces CIMT</ion-label>
+                        <ion-checkbox (ionChange)="impactChange($event,'Reduces CIMT')" color="primary" slot="start"></ion-checkbox>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <p class="step_titles">
+                        What factors influence in prescribing Insulin to T2DM patients<br /> Choose two clinically relevant options
+                    </p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-item lines="none">
+                    <ion-label>
+                        Co-morbid conditions
+                    </ion-label>
+                    <ion-checkbox (ionChange)="influenceChange($event,'Co-morbid conditions')" color="primary" slot="start"></ion-checkbox>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item lines="none">
+                    <ion-label>
+                        High risk factors
+                    </ion-label>
+                    <ion-checkbox (ionChange)="influenceChange($event,'High risk factors')" color="primary" slot="start"></ion-checkbox>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item lines="none">
+                    <ion-label>
+                        Infections
+                    </ion-label>
+                    <ion-checkbox (ionChange)="influenceChange($event,'Infections')" color="primary" slot="start"></ion-checkbox>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item lines="none">
+                    <ion-label>
+                        High A1c (>9)
+                    </ion-label>
+                    <ion-checkbox (ionChange)="influenceChange($event,'High A1c (>9)')" color="primary" slot="start"></ion-checkbox>
+                </ion-item>
+            </ion-row>
+            <div>
+                <button mat-button matStepperPrevious class="bnt_clas">Back</button>
+                <button (click)="submit()" mat-button class="bnt_clas">Submit</button>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</ion-content>

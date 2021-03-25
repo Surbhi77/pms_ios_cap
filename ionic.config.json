@@ -1,0 +1,7 @@
+{
+  "name": "BIQOL",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

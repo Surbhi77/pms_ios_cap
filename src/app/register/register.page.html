@@ -1,0 +1,48 @@
+<ion-content fullscreen padding class="paddming">
+  <div class="title_login">
+    <div class="logo_main">
+      <img src="assets/img/logo_02.png">
+    </div>
+  </div>
+  
+  <form class="main_forms">
+
+    <ion-item lines="full">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" autocomplete="off" clear-input></ion-input>
+    </ion-item>
+    
+    <ion-item lines="full" class="ion-padding-top">
+      <ion-label position="floating">Email address</ion-label>
+      <ion-input type="text" autocomplete="off" clear-input></ion-input>
+    </ion-item>
+
+    <ion-item lines="full" class="ion-padding-top">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" required autocomplete="off" clear-input></ion-input>
+    </ion-item>
+
+    <ion-item lines="full" class="ion-padding-top">
+      <ion-label position="floating">Confirm Password</ion-label>
+      <ion-input type="password" required autocomplete="off" clear-input></ion-input>
+    </ion-item>
+
+    <ion-row class="ion-padding-top">
+      <ion-col size="8"></ion-col>
+      <ion-col size="4">
+        <ion-button type="submit" class="custom_btn"  shape="round" fill="outline" routerLink="/dashboard"> Register </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-top_02">
+      <ion-col size="12" class="text_ce">
+        <ion-text>Already have an account? <a href="" routerLink="/login">Login</a></ion-text>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+  <!-- <div class="imge_boom">
+    <img src="assets/images/login_bottom.png">
+  </div> -->
+</ion-content>

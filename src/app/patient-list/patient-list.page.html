@@ -1,0 +1,177 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="add-entry"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">Patient List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="pation_mm">
+  <ion-list>
+    <ion-list-header>
+     <strong>Draft ECRF</strong> 
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of beginLists;let i = index" class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Mobile : {{item.mobile}}</h2>
+        <h3>Age : {{item.age}}</h3>
+      </ion-label>
+      <ion-button (click)="patientDetails(item)" expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button (click)="deleteItem(item,i)" expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+      
+    </ion-item>
+
+    <!-- <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item> -->
+
+  </ion-list>
+
+
+  <ion-list>
+    <ion-list-header>
+     <strong>Completed ECRF</strong> 
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of completedList" class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Mobile : {{item.mobile}}</h2>
+        <h3>Age : {{item.age}}</h3>
+      </ion-label>
+      <ion-button (click)="completedPatientDetails(item)" expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button *ngIf="item.helpcenter_status == 'Approve'" expand="block" color="success" shape="round"><ion-icon name="checkmark"></ion-icon></ion-button>
+      
+      <ion-button *ngIf="item.helpcenter_status == 'Rejected'" expand="block" color="danger" shape="round"><ion-icon name="close"></ion-icon></ion-button>
+      
+    </ion-item>
+
+    <!-- <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="success" shape="round"><ion-icon name="checkmark"></ion-icon></ion-button>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="success" shape="round"><ion-icon name="checkmark"></ion-icon></ion-button>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="tertiary" shape="round"><ion-icon name="close"></ion-icon></ion-button>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="tertiary" shape="round"><ion-icon name="close"></ion-icon></ion-button>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item class="bor_b" lines="none">
+      <ion-avatar slot="start">
+        <img src="assets/img/patient.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Patient Name</h2>
+        <h3>Age : 25</h3>
+      </ion-label>
+      <ion-button expand="block" color="tertiary" shape="round"><ion-icon name="close"></ion-icon></ion-button>
+      <ion-button expand="block" color="primary" shape="round"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      <ion-button expand="block" color="danger" shape="round"><ion-icon name="trash"></ion-icon></ion-button>
+    </ion-item> -->
+
+  </ion-list>
+
+</ion-content>

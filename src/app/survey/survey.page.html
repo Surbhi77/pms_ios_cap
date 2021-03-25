@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="add-entry"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-left">Invoice</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card>
+    <div class="main_data">
+    <!-- <img src="assets/img/pdf-icon.png" class="img_invoice" /> -->
+    <ion-card-header>
+      <!-- <ion-card-subtitle>Invoice</ion-card-subtitle> -->
+      <ion-card-title class="ion-text-center">Invoice</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="invoiceAvailable">
+      <ion-button color="primary" [href]="link" target="_blank" expand="full" shape="round">Download Invoice</ion-button>
+      <br/>
+      <ng-container *ngIf="invoiceAcceptShow">
+        <ion-row class="ion-no-padding">
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item lines="none">
+              <ion-label>I accept above invoice </ion-label>
+            <ion-checkbox (ionChange)="changeValue($event)" color="primary"  slot="start"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <button (click)="submit()" [disabled]="!acceptChecked" mat-button class="bnt_clas">Submit</button>
+      </ng-container>
+      <ng-container *ngIf="!invoiceAcceptShow">
+        <ion-row class="ion-no-padding">
+          <ion-col size="12" class="ion-no-padding">
+            <ion-item lines="none">
+              <p>Your invoice has been submitted</p>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </ion-card-content>
+  </div>
+  <div *ngIf="!invoiceAvailable" class="data_notfound">
+    <h1>Invoice Not Found</h1>
+  </div>
+  </ion-card>
+</ion-content>
+
+<!--  -->

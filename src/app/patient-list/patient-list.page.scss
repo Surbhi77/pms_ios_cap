@@ -1,0 +1,37 @@
+ion-col{
+    margin: auto;
+    text-align: center;
+}
+.botton_bs ion-col:first-child {
+    border-left: none;
+}
+.botton_bs ion-col {
+    border-left: 1px solid;
+}
+.botton_bs {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+.bords {
+    border: 1px solid;
+    border-top: 0;
+}
+.bords ion-col {
+    border-left: 1px solid;
+}
+.bords ion-col:first-child {
+    border-left: none;
+}
+.pation_mm ion-list {
+    --background: transparent !important;
+    background: transparent !important;
+}
+.pation_mm ion-item{
+    --background: transparent !important;
+    background: transparent !important;
+    border-bottom: 1px solid #cccccc70;
+}
+.pation_mm ion-list-header{
+    --background: transparent !important;
+    background: transparent !important;
+}

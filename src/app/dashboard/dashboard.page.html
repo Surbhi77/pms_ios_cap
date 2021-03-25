@@ -1,0 +1,116 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Patient Survey Study</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-row class="ion-padding-top top_logus">
+    <ion-col size="5">
+      <img [src]="(userInfo && userInfo.type != 'i')?'assets/img/Begin.jpg':'assets/img/Initiate.jpg'" class="img-fluid">
+    </ion-col>
+    <ion-col size="7">
+      <h3 *ngIf="userInfo && userInfo.name!=''">Welcome {{userInfo.name}}</h3>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-margin-top">
+    <ion-col size="6">
+      <ion-card class="ion-no-margin card_radus" routerLink="/add-entry">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/add.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>Add Entry</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col *ngIf="kdpFilled" size="6">
+      <ion-card class="ion-no-margin card_radus fill_color">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/add.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>KAP Survey</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col *ngIf="!kdpFilled" size="6">
+      <ion-card class="ion-no-margin card_radus" routerLink="/kdp-suvey">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/add.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>KAP Survey</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card class="ion-no-margin card_radus" routerLink="/patient-list">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/patient.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>Patient Logs</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6"> 
+      <ion-card class="ion-no-margin card_radus" routerLink="/how-its-work">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/team.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>How it works</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card class="ion-no-margin card_radus" routerLink="/instructions">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/medical-book.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>Queries</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card class="ion-no-margin card_radus" routerLink="/settings">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/settings.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>Settings</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card class="ion-no-margin card_radus" routerLink="/survey">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/settings.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>Invoice</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-card class="ion-no-margin card_radus" (click)="logout()" routerLink="/login">
+        <ion-card-header>
+          <img class="img_xs" src="assets/icon/logout.png">
+        </ion-card-header>
+        <ion-card-content class="ion-text-center hight_md">
+          <h5>Logout</h5>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
